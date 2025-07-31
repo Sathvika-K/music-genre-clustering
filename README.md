@@ -100,7 +100,7 @@ This helped me gain experience in:
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * Python
 * NumPy, Pandas
@@ -111,7 +111,7 @@ This helped me gain experience in:
 
 ---
 
-## 📬 Contact
+##  Contact
 
 If you'd like to learn more about this project or collaborate on similar work, feel free to connect:
 
