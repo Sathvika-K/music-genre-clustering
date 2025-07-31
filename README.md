@@ -6,116 +6,116 @@ The goal was not to build a genre classifier, but to **group songs based on thei
 
 ---
 
-## Dataset Used
+##  Dataset Used
 
 I used the **FMA (Free Music Archive)** dataset — a popular open-source dataset for music analysis and MIR (Music Information Retrieval) tasks.
 
 - 🔗 Kaggle Link: [Free Music Archive (FMA): Small subset](https://www.kaggle.com/datasets/adarshsng/fma-music-dataset)
 
-> Specifically, I worked with the **fma_small** subset (~8s clips of 8,000 songs in various genres).
+> Specifically, I worked with the **fma_small** subset (~8-second clips of 8,000 songs across various genres).
 
 ---
 
-## Project Structure
+##  Project Structure
 
-| File / Folder           | Description |
-|------------------------|-------------|
-| `app.py`               | 📱 Streamlit web app to predict cluster from user-uploaded `.mp3` files |
-| `kmeans_model.pkl`     | 🎯 Trained KMeans model (32 features) |
-| `filenames.txt`        | List of processed filenames used in training |
-| `clusters.txt`         | Predicted cluster for each training song |
-| `requirements.txt`     | Python dependencies to run the app |
-| `music_genre_training.ipynb` | 📓 Kaggle notebook where data was processed & model was trained |
+| File / Folder               | Description |
+|----------------------------|-------------|
+| `app.py`                   |  Streamlit app for audio upload and clustering prediction |
+| `kmeans_model.pkl`         |  Trained KMeans model using 32 audio features |
+| `filenames.txt`            |  List of song filenames used during training |
+| `clusters.txt`             |  Predicted cluster ID for each training song |
+| `requirements.txt`         |  Python dependencies |
+| `music_genre_training.ipynb` |  Kaggle notebook for feature extraction & model training |
 
 ---
 
-##  What I Did in the Jupyter Notebook
+## What I Did in the Jupyter Notebook
 
-In the `music_genre_training.ipynb` file, I:
+In the `music_genre_training.ipynb`, I:
 
-1. **Extracted audio features** using `librosa` for each `.mp3` file in the dataset:
-   - 13 **MFCCs** (representing timbre)
+1. **Extracted audio features** using `librosa` from each `.mp3` file:
+   - 13 **MFCCs** (for timbre)
    - 12 **Chroma** features (pitch class)
-   - 7 **Spectral contrast** features (tonal texture)
-   - ➡️ Combined into a total of **32 features per song**
+   - 7 **Spectral contrast** features (tonal sharpness)
+   - Combined into **32 total features per song**
 
 2. **Preprocessed the data**:
-   - Skipped corrupt or unreadable files
-   - Normalized inputs and stacked features into a matrix
+   - Handled broken or unreadable audio files
+   - Formatted the features into a clean matrix for clustering
 
-3. **Trained a KMeans clustering model** using:
-   - `KMeans(n_clusters=5, random_state=42)`
-   - No labels were used — the model grouped songs purely based on feature similarity
+3. **Trained a KMeans model**:
+   - `KMeans(n_clusters=5, random_state=42)` using `scikit-learn`
+   - No labels used — this was purely **unsupervised learning**
 
-4. **Saved the model and outputs**:
-   - Saved the trained model using `joblib`
-   - Saved predicted cluster IDs (`clusters.txt`)
-   - Saved corresponding filenames (`filenames.txt`)
+4. **Saved model artifacts**:
+   - Exported model using `joblib`
+   - Saved predicted clusters and filenames for downstream usage
 
 ---
 
 ##  What the Streamlit App Does
 
-The deployed web app allows users to:
+The Streamlit app is built to:
 
-- **Upload any `.mp3` file**
-- The app extracts the same 32 features using `librosa`
-- **Predicts which cluster** the uploaded song belongs to using the trained KMeans model
-- **Lists similar songs** (based on cluster match) from the training data
-- **Displays a cluster distribution chart**
-- Provides detailed **explanations and insights** for non-ML viewers
+-  Allow users to upload any `.mp3` file
+-  Extract the same 32 features using `librosa`
+-  Predict the cluster the uploaded track belongs to using the trained model
+-  Show similar tracks from the same cluster
+-  Visualize overall cluster distribution
+-  Include clear explanations of the model and audio features for any viewer
+
+>  **Note**: Due to `librosa`'s system-level dependencies, this app is designed for **local execution only**. Deployment on Streamlit Cloud was not possible, but the app works fully and reliably on your own machine.
 
 ---
 
 ##  Run Locally
+
+To use the app locally:
 
 ```bash
 git clone https://github.com/Sathvika-k/music-genre-clustering.git
 cd music-genre-clustering
 pip install -r requirements.txt
 streamlit run app.py
- Try the App Live
- Click here to open the app
+````
 
+---
 
- Why I Built This:
-This project was built entirely for learning purposes.
+##  Why I Built This
 
-I wanted to understand:
+This project was created entirely for **learning and hands-on understanding**.
 
-How raw audio can be converted into numerical features
+I wanted to explore:
 
-How unsupervised learning can group data without labels
+*  How raw audio can be converted into meaningful numerical features
+*  How unsupervised learning works without labels
+*  How to build an interactive machine learning app with Streamlit
 
-How to deploy an ML model with a clean web UI using Streamlit
+This helped me gain experience in:
 
-It gave me practical experience with:
+* Audio processing (`librosa`)
+* Clustering (`scikit-learn`)
+* Interface design & integration (`Streamlit`)
+* End-to-end ML workflow — from data to user experience
 
-Audio processing (librosa)
+---
 
-Clustering (scikit-learn)
+## 🛠️ Tech Stack
 
-Deployment (Streamlit)
+* Python
+* NumPy, Pandas
+* Librosa (feature extraction)
+* scikit-learn (KMeans clustering)
+* Matplotlib, Seaborn (visualizations)
+* Streamlit (web interface)
 
-End-to-end project workflow
+---
 
-Tech Stack:
-Python
+## 📬 Contact
 
-NumPy, Pandas
+If you'd like to learn more about this project or collaborate on similar work, feel free to connect:
 
-Librosa
+* **Name**: Kambham Sai Sathvika
+* **Email**: [saisathvika07@gmail.com](mailto:saisathvika07@gmail.com)
+* **GitHub**: [github.com/Sathvika-k](https://github.com/Sathvika-k)
 
-scikit-learn
-
-Matplotlib, Seaborn
-
-Streamlit
-
-Contact:
-
-If you'd like to learn more about this project or collaborate on similar work, feel free to connect!
-
-Name: Kambham Sai Sathvika
-Email: saisathvika07@gmail.com
-GitHub: github.com/Sathvika-k
