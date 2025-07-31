@@ -1,12 +1,12 @@
 streamlit
 librosa==0.10.1
-numpy==1.23.5
+soundfile
 scikit-learn
+numpy==1.23.5
+scipy==1.10.1
+numba==0.57.0
+llvmlite==0.40.1
 joblib
 matplotlib
 seaborn
 pandas
-soundfile
-scipy==1.10.1
-numba==0.57.0
-llvmlite==0.40.1
